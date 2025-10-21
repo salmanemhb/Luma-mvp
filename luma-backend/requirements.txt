@@ -38,6 +38,8 @@ weasyprint==60.2
 python-dotenv==1.0.1
 pydantic==2.5.3
 pydantic-settings==2.1.0
+email-validator>=2.0.0
+resend>=0.8.0
 
 # Development
 pytest==7.4.4
