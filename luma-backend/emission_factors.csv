@@ -1,0 +1,7 @@
+category,unit,factor,source,year
+electricity,kWh,0.231,EEA,2023
+natural_gas,m3,0.202,IPCC,2023
+diesel,L,0.268,IPCC,2023
+petrol,L,0.239,IPCC,2023
+freight_transport,tonne_km,0.062,DEFRA,2023
+purchased_goods,EUR,0.00035,ADEME,2022

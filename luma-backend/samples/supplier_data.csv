@@ -1,0 +1,6 @@
+date,supplier,category,usage,unit,cost,invoice_number,notes
+15/01/2024,Endesa,electricity,4320,kWh,966.61,2024-ES-001234,Monthly electricity bill
+20/01/2024,Repsol,diesel,85.5,L,124.75,78945612,Company vehicle refuel
+22/01/2024,Gas Natural,natural_gas,1250,m3,523.40,GN-2024-0045,Heating - factory
+25/01/2024,Transportes López,freight_transport,2500,tonne_km,450.00,TL-2024-123,Raw material delivery
+28/01/2024,Aceros SA,purchased_goods,15000,EUR,15000.00,AC-2024-567,Steel purchase

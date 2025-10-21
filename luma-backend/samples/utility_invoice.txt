@@ -1,0 +1,69 @@
+# Sample data for testing - Spanish utility invoice text
+
+ENDESA ENERGÍA S.A.U.
+Calle Ribera del Loira 60
+28042 Madrid
+
+FACTURA DE ELECTRICIDAD
+
+Número de factura: 2024-ES-001234
+Fecha: 15/01/2024
+CIF: B12345678
+
+Cliente: Manufacturas Acme S.L.
+Dirección: Polígono Industrial Norte, Nave 12
+28850 Torrejón de Ardoz, Madrid
+
+CUPS: ES0031406519384001JY2F
+Tarifa: 3.0TD
+
+DETALLE DE CONSUMO:
+
+Período: 01/12/2023 - 31/12/2023
+
+Energía consumida:
+- Punta: 1.250 kWh
+- Llano: 2.180 kWh  
+- Valle: 890 kWh
+Total consumo: 4.320 kWh
+
+IMPORTE:
+
+Término de energía: 612,40 €
+Término de potencia: 145,80 €
+Impuesto eléctrico: 38,15 €
+Alquiler equipos: 2,50 €
+
+Subtotal: 798,85 €
+IVA (21%): 167,76 €
+
+TOTAL A PAGAR: 966,61 €
+
+Forma de pago: Domiciliación bancaria
+Fecha de cargo: 05/02/2024
+
+Para consultas: 900 123 456
+www.endesa.com
+
+---
+
+REPSOL
+Carretera M-40, Km 14
+28914 Leganés, Madrid
+
+TICKET DE COMBUSTIBLE
+
+Estación: Repsol Torrejón Este
+Fecha: 20/01/2024  10:35
+Ticket nº: 78945612
+
+DIESEL
+Cantidad: 85,5 litros
+Precio: 1,459 €/litro
+
+IMPORTE TOTAL: 124,75 €
+
+Matrícula: 1234 ABC
+Kilometraje: 45.230 km
+
+IVA incluido
