@@ -144,4 +144,14 @@ export const adminAPI = {
     api.get('/api/admin/stats'),
 };
 
+// Standalone exports for backward compatibility
+export const getDashboardData = dashboardAPI.getData;
+export const uploadFile = uploadAPI.upload;
+export const analyzeData = analyzeAPI.analyze;
+export const generateReport = reportAPI.generate;
+export const getReport = reportAPI.getReport;
+export const getAdminStats = adminAPI.getInsights;
+export const getCompanies = adminAPI.listCompanies;
+export const exportData = adminAPI.exportData;
+
 export default api;
