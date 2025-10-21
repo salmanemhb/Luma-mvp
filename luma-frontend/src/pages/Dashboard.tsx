@@ -8,6 +8,7 @@ import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, LineE
 import { Line, Pie } from 'react-chartjs-2';
 import { Activity, TrendingDown, TrendingUp, FileText } from 'lucide-react';
 import { getDashboardData } from '@/lib/api';
+import { uploadAPI } from '@/lib/api';
 import { useNavigate } from 'react-router-dom';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement);
@@ -16,13 +17,31 @@ export const Dashboard = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [data, setData] = useState<any>(null);
+  const [recentUploads, setRecentUploads] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getDashboardData();
-        setData(response.data);
+        const backendData = response.data;
+        
+        // Transform backend response to frontend format
+        const transformedData = {
+          total_emissions: backendData.summary?.total_co2e || 0,
+          scope1: backendData.summary?.scope1_co2e || 0,
+          scope2: backendData.summary?.scope2_co2e || 0,
+          scope3: backendData.summary?.scope3_co2e || 0,
+          data_coverage: backendData.summary?.data_coverage || 0,
+          monthly_data: backendData.monthly_data?.map((item: any) => ({
+            month: item.month ? new Date(item.month).toLocaleDateString('en', { month: 'short' }) : 'N/A',
+            emissions: item.co2e || 0
+          })) || [],
+          category_breakdown: backendData.category_breakdown || [],
+          top_suppliers: backendData.top_suppliers || [],
+        };
+        
+        setData(transformedData);
       } catch (error) {
         console.error('Failed to fetch dashboard data:', error);
         // Use mock data for demo
@@ -40,18 +59,25 @@ export const Dashboard = () => {
             { month: 'May', emissions: 102 },
             { month: 'Jun', emissions: 95 }
           ],
-          recent_uploads: [
-            { id: 1, filename: 'electricity_bill_june.pdf', status: 'processed', co2e: 45.2 },
-            { id: 2, filename: 'gas_invoice_june.pdf', status: 'processed', co2e: 32.8 },
-            { id: 3, filename: 'transport_data.csv', status: 'processing', co2e: null }
-          ]
+          category_breakdown: [],
+          top_suppliers: [],
         });
       } finally {
         setLoading(false);
       }
     };
 
+    const fetchUploads = async () => {
+      try {
+        const response = await uploadAPI.listDocuments();
+        setRecentUploads(response.data.documents?.slice(0, 5) || []);
+      } catch (error) {
+        console.error('Failed to fetch uploads:', error);
+      }
+    };
+
     fetchData();
+    fetchUploads();
   }, []);
 
   if (loading) {
@@ -156,25 +182,37 @@ export const Dashboard = () => {
                 <tr className="border-b border-border">
                   <th className="text-left py-3 px-4">File</th>
                   <th className="text-left py-3 px-4">Status</th>
-                  <th className="text-left py-3 px-4">CO₂e (kg)</th>
+                  <th className="text-left py-3 px-4">Uploaded</th>
                 </tr>
               </thead>
               <tbody>
-                {data?.recent_uploads?.map((upload: any) => (
-                  <tr key={upload.id} className="border-b border-border/50">
-                    <td className="py-3 px-4">{upload.filename}</td>
-                    <td className="py-3 px-4">
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        upload.status === 'processed' 
-                          ? 'bg-primary/10 text-primary' 
-                          : 'bg-secondary/10 text-secondary'
-                      }`}>
-                        {upload.status}
-                      </span>
+                {recentUploads.length > 0 ? (
+                  recentUploads.map((upload: any) => (
+                    <tr key={upload.id} className="border-b border-border/50">
+                      <td className="py-3 px-4">{upload.filename}</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-2 py-1 rounded-full text-xs ${
+                          upload.status === 'processed' 
+                            ? 'bg-primary/10 text-primary' 
+                            : upload.status === 'processing'
+                            ? 'bg-secondary/10 text-secondary'
+                            : 'bg-muted text-muted-foreground'
+                        }`}>
+                          {upload.status}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4">
+                        {upload.uploaded_at ? new Date(upload.uploaded_at).toLocaleDateString() : '-'}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={3} className="py-8 text-center text-muted-foreground">
+                      No documents uploaded yet. <a href="/upload" className="text-primary hover:underline">Upload your first document</a>
                     </td>
-                    <td className="py-3 px-4">{upload.co2e ? upload.co2e.toFixed(1) : '-'}</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
