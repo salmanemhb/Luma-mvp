@@ -22,7 +22,7 @@ passlib[bcrypt]==1.7.4
 # OCR & Document Processing
 pytesseract==0.3.10
 pdf2image==1.17.0
-Pillow==10.2.0
+Pillow>=10.3.0
 google-cloud-vision==3.6.0
 
 # Data Processing
