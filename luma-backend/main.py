@@ -46,6 +46,8 @@ app.add_middleware(
         "http://localhost:5173",  # Vite dev server
         "http://localhost:3000",  # Alternative React port
         "https://luma.vercel.app",  # Production frontend
+        "https://luma-mvp.vercel.app",  # MVP frontend
+        "https://*.vercel.app",  # All Vercel preview deployments
     ],
     allow_credentials=True,
     allow_methods=["*"],
