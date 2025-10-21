@@ -2,50 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --background: 36 28% 96%;
+    --foreground: 120 10% 20%;
+
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 120 10% 20%;
+
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 142 38% 27%; /* Sage green */
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 43 74% 49%; /* Gold */
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 142 38% 27%;
-    --radius: 0.5rem;
+    --popover-foreground: 120 10% 20%;
+
+    --primary: 104 15% 68%;
+    --primary-foreground: 120 10% 20%;
+
+    --secondary: 42 34% 63%;
+    --secondary-foreground: 120 10% 20%;
+
+    --muted: 104 20% 90%;
+    --muted-foreground: 120 8% 45%;
+
+    --accent: 42 34% 63%;
+    --accent-foreground: 120 10% 20%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 104 20% 85%;
+    --input: 104 20% 85%;
+    --ring: 104 15% 68%;
+
+    --radius: 1rem;
+
+    --hero-gradient-start: 104 15% 68%;
+    --hero-gradient-end: 36 28% 96%;
+
+    --shadow-soft: 0 4px 12px -2px hsl(104 15% 68% / 0.15);
+    --shadow-glow: 0 0 20px hsl(104 15% 68% / 0.3);
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 142 38% 27%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 43 74% 49%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 142 38% 45%;
+    --background: 120 10% 10%;
+    --foreground: 36 28% 96%;
+
+    --card: 120 10% 15%;
+    --card-foreground: 36 28% 96%;
+
+    --popover: 120 10% 15%;
+    --popover-foreground: 36 28% 96%;
+
+    --primary: 104 15% 68%;
+    --primary-foreground: 120 10% 10%;
+
+    --secondary: 42 34% 63%;
+    --secondary-foreground: 120 10% 10%;
+
+    --muted: 120 10% 20%;
+    --muted-foreground: 104 10% 65%;
+
+    --accent: 42 34% 63%;
+    --accent-foreground: 120 10% 10%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 36 28% 96%;
+
+    --border: 120 10% 25%;
+    --input: 120 10% 25%;
+    --ring: 104 15% 68%;
+    
+    --shadow-soft: 0 4px 12px -2px hsl(0 0% 0% / 0.4);
+    --shadow-glow: 0 0 20px hsl(104 15% 68% / 0.5);
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -53,7 +103,71 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer utilities {
+  .btn-hero {
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground shadow-[var(--shadow-glow)] transition-all duration-300 hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-[var(--shadow-soft)] transition-all duration-300;
+  }
+  
+  .card-elevated {
+    @apply bg-card rounded-2xl shadow-[var(--shadow-soft)] border border-border/50 hover:shadow-[var(--shadow-glow)] transition-all duration-300;
+  }
+  
+  .gradient-hero {
+    background: linear-gradient(135deg, hsl(var(--hero-gradient-start)), hsl(var(--hero-gradient-end)));
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out;
+  }
+  
+  .animate-slide-in-right {
+    animation: slide-in-right 0.5s ease-out;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
