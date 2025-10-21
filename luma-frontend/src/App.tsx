@@ -2,12 +2,13 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './contexts/AuthContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { Toaster } from './components/ui/toaster';
+import { Toaster as Sonner } from 'sonner';
 import Layout from './components/Layout';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import Upload from './pages/Upload';
-import Report from './pages/Report';
-import AdminDashboard from './pages/admin/AdminDashboard';
+import { Auth as Login } from './pages/Login';
+import { Dashboard } from './pages/Dashboard';
+import { Upload } from './pages/Upload';
+import { Report } from './pages/Report';
+import { Dashboard as AdminDashboard } from './pages/admin/AdminDashboard';
 import AdminCompanies from './pages/admin/AdminCompanies';
 import AdminCompanyDetail from './pages/admin/AdminCompanyDetail';
 import AdminActivity from './pages/admin/AdminActivity';
@@ -21,6 +22,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Toaster />
+          <Sonner />
           <Routes>
             <Route path="/login" element={<Login />} />
             
